@@ -1,0 +1,157 @@
+body{
+    background: #181824;
+    font-size: 62.5%;
+    font-family: Verdana;
+}
+
+/* .header{
+    position: static;
+    width: 100%;
+    height: 30%;
+    left: 0px;
+    top: 0px;
+    background: linear-gradient(131.73deg, rgba(114, 190, 248, 0.8) 14.46%, rgba(166, 116, 242, 0.8) 87.62%), url('images/bg__trees.png');
+    background-size:cover;
+} */
+
+.container{
+    width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(131.73deg, rgba(114, 190, 248, 0.8) 14.46%, rgba(166, 116, 242, 0.8) 87.62%), url('images/bg__trees.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+}
+.toDo{
+    width: 100%;
+    max-width: 540px;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 7rem 0 0 0;
+}
+
+.addToDo{
+    position: static;
+    width: 56%;
+    height: 56px;
+    left: 20px;
+    top: 104px;
+    background: #25273C;
+    border-radius: 7px;
+}
+.add-input{
+    position: static;
+    width: 166px;
+    height: 19px;
+    left: 76px;
+    top: 122px;
+    font-family: Verdana;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: rgba(255, 255, 255, 0.4);
+}
+.content{
+    position: static;
+    width: 800px;
+    height: 148px;
+    left: 320px;
+    top: 296px;
+    background: #25273C;
+    border-radius: 7px;
+    text-align: center;
+}
+
+.content-text{
+    position: static;
+    font-family: Verdana;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 492px;
+    height: 48px;
+    left: 474px;
+    top: 346px;
+}
+
+.toDoTitle{
+    font-family: Verdana;
+    font-style: normal;
+    font-weight: bold;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-size: 4rem;
+    line-height: 4rem;
+}
+
+.filterDiv{
+    position: static;
+    width: 335px;
+    height: 56px;
+    left: 20px;
+    top: 568px;
+    background: #25273C;
+    border-radius: 7px;
+}
+
+.uncheck, .check{
+    width:24px;
+    height: 24px;
+    border: 1px solid #393A4B;
+    border-radius: 50%;
+    background: transparent;
+}
+.check{
+    position: static;
+    width: 24px;
+    height: 24px;
+    left: 36px;
+    top: 224px;
+    background: linear-gradient(131.73deg, #72BEF8 14.46%, #A674F2 87.62%);
+}
+
+.removeX{
+    position: static;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+}
+
+.removieX:hover{
+    position: static;
+    left: 20.83%;
+    right: 20.83%;
+    top: 20.83%;
+    bottom: 20.83%;
+    background: rgba(255, 255, 255, 0.2);
+    
+}
+
+.display-list-item{
+    position: static;
+    width: 74px;
+    height: 19px;
+    left: 76px;
+    top: 451px;
+    font-family: Verdana;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
