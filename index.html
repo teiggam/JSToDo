@@ -2,31 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ToDo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="headerIMG">
     <div class="container">
-        <div class="toDo">
-            <header class="header">
-                <section class="title">
-                    <h2 class="toDoTitle">
-                        TODO
-                    </h2>
-                </section>
-                <div class="addToDo">
-                    <div class="uncheck">
+        <div class="todo">
+                <div class="header">
+                    <section class="top-title">
+                        <div class="title">
+                            TODO
+                        </div>
+                    </section>
+                    <div class="addToDo">
+                        <div class="circle"></div>
+                        <input class ="add-input" type="text" id="input" placeholder="Create a new item...">
                     </div>
-                    <input type="text" class="todo__input" name="todo-input"id="todo-input" placeholder="Create a new item..." />
-                 </div>
-            </div>
-            <div class="content">
-                <div class="content-text">
-                    You have no items in your todo list. Create an item to begin tracking your list.
                 </div>
-                
-            </header>
+                <div class="content" id="noList">
+                    <ul id="list">
+                        <!--This is where the items will be added via JS-->
+                    </ul>
+                    <div class="clear">
+                        <button class="clear" onclick="clearList()">Clear List</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
