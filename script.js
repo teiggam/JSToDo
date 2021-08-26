@@ -2,6 +2,7 @@
 
 const list = document.getElementById("list");
 const input = document.getElementById("input");
+const itemCount = document.getElementById("count");
 
 //set variables
 let listArray, id;
@@ -15,6 +16,7 @@ let listArray, id;
      listArray = JSON.parse(data);
      id = listArray.length;
      loadList(listArray);
+     updateCount();
  }
  else{
      listArray = []
@@ -25,13 +27,14 @@ let listArray, id;
 
 
  
-//load items from list
+//load entire list
 function loadList(array){
     array.forEach(function(item){
         addToDo(item.name, item.id, item.done, item.trash);
     });
 }
 
+//load list of only completed items
 function loadCompleted(array){
     array.forEach(function(item){
         if(item.done){
@@ -40,6 +43,7 @@ function loadCompleted(array){
     });
 }
 
+//load list of only active/not completed items
 function loadActive(array){
     array.forEach(function(item){
         if(!item.done){
@@ -81,6 +85,7 @@ function completeToDo(element){
     listArray[element.id].done = listArray[element.id].done ? false : true;
     
     updateLocalStorage();
+    
 }
 
 //remove to do function
@@ -88,7 +93,7 @@ function completeToDo(element){
 function removeToDo(element){
     element.parentNode.parentNode.removeChild(element.parentNode);
     listArray[element.id].trash = true;
-    
+
 
     updateLocalStorage();
 }
@@ -101,7 +106,8 @@ function clearList(){
 }
 
 function updateLocalStorage(){
-    localStorage.setItem("TODO", JSON.stringify(listArray))
+    localStorage.setItem("TODO", JSON.stringify(listArray));
+    updateCount();
 }
 
 //Functions to have filtered lists
@@ -119,6 +125,18 @@ function activeToDoList() {
 function showAllList() {
     document.getElementById("list").innerHTML = "";
     loadList(listArray);
+}
+
+
+
+//Function to update item count
+function updateCount(){
+    let count = listArray.reduce((count, item) =>{
+        if (!item.done) count++;
+        return count;
+    }, 0);
+
+    itemCount.innerHTML = count;
 }
 
 /*************************/
@@ -162,11 +180,3 @@ list.addEventListener("click", function(event){
     }
    
 });
-
-let doneArray = listArray.filter(function(item) {
-    return item.done == true;
-});
-
-console.log(doneArray);
-
-
