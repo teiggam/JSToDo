@@ -8,6 +8,7 @@ let listArray, id;
 
  //local storage; get and add
  let data = localStorage.getItem("TODO");
+ let completedData = localStorage.getItem("TODO");
 
  //check for data, and send it to listArray
  if(data){
@@ -31,20 +32,33 @@ function loadList(array){
     });
 }
 
+function loadCompleted(array){
+    array.forEach(function(item){
+        if(item.done){
+            addToDo(item.name, item.id, item.done, item.trash);
+        }
+    });
+}
+
+function loadActive(array){
+    array.forEach(function(item){
+        if(!item.done){
+            addToDo(item.name, item.id, item.done, item.trash);
+        }
+    });
+}
+
 //Add a to do
 
 function addToDo(toDo, id, done, trash){   
-    if(trash){
-        return;
-    }
-
     const DONE = done? "check" : "circle";
     const LINE = done? "line-through" : "";
+    const CHECK = done? "" : "hidden"
     const item =`
                     <li class="item">
-                    <button class="${DONE}" job="complete" id="${id}"><img class="checkmark hidden" src="images/icon__check.png"/></button>
-                    <p class="text" ${LINE}">${toDo}</p>
-                    <button class="remove" job="delete" id="0"><img class="img" src="images/icon__close.png"/></button>
+                    <button class="${DONE}" job="complete" id="${id}"><img class="checkmark ${CHECK}" src="images/icon__check.png"/></button>
+                    <p class="text ${LINE}">${toDo}</p>
+                    <button class="remove" job="delete" id="${id}"><img class="img" src="images/icon__close.png"/></button>
                     </li>
 
 
@@ -52,6 +66,7 @@ function addToDo(toDo, id, done, trash){
     const position = "beforeend";
     document.getElementById("noList").innerHTML = '';
     list.insertAdjacentHTML(position, item);
+
     
 }
 
@@ -65,17 +80,17 @@ function completeToDo(element){
     element.parentNode.querySelector(".text").classList.toggle("line-through");
     listArray[element.id].done = listArray[element.id].done ? false : true;
     
-    localStorage.setItem("TODO", JSON.stringify(listArray));
+    updateLocalStorage();
 }
 
 //remove to do function
 
 function removeToDo(element){
     element.parentNode.parentNode.removeChild(element.parentNode);
-
     listArray[element.id].trash = true;
+    
 
-    localStorage.setItem("TODO", JSON.stringify(listArray))
+    updateLocalStorage();
 }
 
 //Clear list from local storage
@@ -85,6 +100,26 @@ function clearList(){
     return false;
 }
 
+function updateLocalStorage(){
+    localStorage.setItem("TODO", JSON.stringify(listArray))
+}
+
+//Functions to have filtered lists
+function completedToDoList(){
+    document.getElementById("list").innerHTML = "";
+    loadCompleted(listArray);
+}
+
+
+function activeToDoList() {
+    document.getElementById("list").innerHTML = "";
+    loadActive(listArray);
+}
+
+function showAllList() {
+    document.getElementById("list").innerHTML = "";
+    loadList(listArray);
+}
 
 /*************************/
 //Event Listeners 
@@ -106,8 +141,9 @@ input.addEventListener("keyup", (event) => {
                 trash: false,  
             });
             id++;
-            localStorage.setItem("TODO", JSON.stringify(listArray));   
+            updateLocalStorage();  
         }
+
         input.value="";
     }
 });
@@ -127,5 +163,10 @@ list.addEventListener("click", function(event){
    
 });
 
+let doneArray = listArray.filter(function(item) {
+    return item.done == true;
+});
+
+console.log(doneArray);
 
 

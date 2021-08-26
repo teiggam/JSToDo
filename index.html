@@ -24,7 +24,13 @@
                 <div class="content">
                     <p id="noList"></p>
                     <ul id="list"> </ul>
-                    <button class="clear" onclick="clearList()">Clear List</button>
+                    <div class="filters">
+                        <button class= "count filterbutton" style="float:left">0 items left</button>
+                        <button class="all filterbutton" onclick="showAllList()">All</button>
+                        <button class ="active filterbutton" onclick="activeToDoList()">Active</button>
+                        <button class ="completed filterbutton" onclick="completedToDoList()">Completed</button>
+                        <button class="clear filterbutton" onclick="clearList()" style="float:right">Clear List</button>
+                    </div>
                 </div>
             </div>
         </div>

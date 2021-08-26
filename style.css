@@ -199,14 +199,21 @@ li{
     background-color: transparent;
 }
 
-.clear{
+.filterbutton{
     background-color: transparent;
-    font-weight: bold;
-    color: white;
-    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(255, 255, 255, 0.4);
     border: none;
     padding-top: 15px;
     padding-left: 15px;
+    font-size: 12px;
+    line-height: 15px;
+}
+.filterbutton :hover{
+    font-weight: bold;
+    color: white; 
 }
 
-
+.filters{
+    text-align: center;
+}
