@@ -1,11 +1,10 @@
-
 //Select Elements
 
 const list = document.getElementById("list");
 const input = document.getElementById("input");
 const itemCount = document.getElementById("count");
 
-//set variables
+//Set variables
 let listArray = [], id = 0, activeList = 'all';
 
  //Getting local storage
@@ -22,7 +21,13 @@ let listArray = [], id = 0, activeList = 'all';
  listArray = JSON.parse(data);
  
 
- if(listArray == null || listArray.length < 1){
+ if(listArray == null){
+    id = 0;
+    listArray = []
+    document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
+ }
+
+ else if(listArray.length < 1){
      id = 0;
      listArray = []
      document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
