@@ -81,8 +81,6 @@ JavaScript is a language that I need to learn more about and I'm absolutely eage
 - [Code Explained Youtube](https://www.youtube.com/watch?v=b8sUhU_eq3g) - This video was useful to helping this JS beginner make a to do list.
 
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
-
 ## Author
 
 Maggie Tamanini
@@ -91,5 +89,7 @@ Maggie Tamanini
 
 ## Acknowledgments
 
-I would like to thank Youtube and Stack Overflow for helping me even get this far on this challenge.  You are the real MVP.
+I would like to thank Youtube and Stack Overflow for helping me even get this far on this challenge.  
+
+###You are the real MVP.
 

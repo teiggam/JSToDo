@@ -23,6 +23,7 @@ let listArray, id;
      id = 0;
      document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
  }
+ console.log(listArray);
 
 
 
@@ -30,7 +31,7 @@ let listArray, id;
 //load entire list
 function loadList(array){
     array.forEach(function(item){
-        addToDo(item.name, item.id, item.done, item.trash);
+        addToDo(item.name, item.id, item.done);
     });
 }
 
@@ -38,7 +39,7 @@ function loadList(array){
 function loadCompleted(array){
     array.forEach(function(item){
         if(item.done){
-            addToDo(item.name, item.id, item.done, item.trash);
+            addToDo(item.name, item.id, item.done);
         }
     });
 }
@@ -47,14 +48,14 @@ function loadCompleted(array){
 function loadActive(array){
     array.forEach(function(item){
         if(!item.done){
-            addToDo(item.name, item.id, item.done, item.trash);
+            addToDo(item.name, item.id, item.done);
         }
     });
 }
 
 //Add a to do
 
-function addToDo(toDo, id, done, trash){   
+function addToDo(toDo, id, done){   
     const DONE = done? "check" : "circle";
     const LINE = done? "line-through" : "";
     const CHECK = done? "" : "hidden"
@@ -82,28 +83,52 @@ function completeToDo(element){
     element.classList.toggle("circle");
     element.parentNode.querySelector(".checkMark").classList.toggle("hidden");
     element.parentNode.querySelector(".text").classList.toggle("line-through");
+    console.log(element.id);
+    console.log(listArray[element.id].done);
     listArray[element.id].done = listArray[element.id].done ? false : true;
     
     updateLocalStorage();
+    console.log(listArray);
     
 }
 
 //remove to do function
 
 function removeToDo(element){
-    element.parentNode.parentNode.removeChild(element.parentNode);
-    listArray[element.id].trash = true;
+    var index = listArray.findIndex(function(o){
+        return o.id == element.id;
+    })
 
-
+    if (index !== -1){
+        listArray.splice(index, 1);
+    } 
     updateLocalStorage();
+    location.reload();
+
 }
+
 
 //Clear list from local storage
-function clearList(){
-    localStorage.clear();
-    location.reload();
-    return false;
+function clearCompleted(){
+
+    listArray.forEach(function(item){
+
+        if(item.done)
+        {
+            var index = listArray.findIndex(function(o){
+                return o.id === item.id;
+            })
+            if(index !== -1){
+                listArray.splice(index, 1);
+            };
+        }
+        return false;
+    }
+    )
+    updateLocalStorage();
+    location.reload();   
 }
+    
 
 function updateLocalStorage(){
     localStorage.setItem("TODO", JSON.stringify(listArray));
@@ -156,7 +181,6 @@ input.addEventListener("keyup", (event) => {
                 name: toDo,
                 id: id,
                 done: false,
-                trash: false,  
             });
             id++;
             updateLocalStorage();  
@@ -172,10 +196,11 @@ list.addEventListener("click", function(event){
     const element = event.target;
     const elementJob = element.attributes.job.value;
     
-    if(elementJob == "complete"){
+    if(elementJob === "complete"){
+        console.log(element.id);
         completeToDo(element);
     }
-    else if (elementJob == "delete" ){
+    else if (elementJob === "delete" ){
         removeToDo(element);
     }
    
