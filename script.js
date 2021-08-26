@@ -7,29 +7,31 @@ const itemCount = document.getElementById("count");
 //set variables
 let listArray = [], id = 0, activeList = 'all';
 
- //local storage; get and add
+ //Getting local storage
  let data = localStorage.getItem("TODO");
  let completedData = localStorage.getItem("TODO");
  let lsActiveListJSON = localStorage.getItem("ACTIVELIST")
 
 
 
- //check for data, and send it to listArray
+ //This will pull the active list to run while reloading page
  lsActiveList = JSON.parse(lsActiveListJSON);
+ 
+ //check for data, and send it to listArray
  listArray = JSON.parse(data);
+
+
  if(listArray.length < 1){
      id = 0;
      listArray = []
      document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
-
  }
  else{
      previousId = Math.max.apply(Math, listArray.map(function(o) {return o.id}));
      id = previousId + 1;
  }
 
-console.log(lsActiveList);
-
+//Check which list is active and will load the appropiate list
 if(lsActiveList == 'all'){
      loadList(listArray, lsActiveList);
      updateCount();
@@ -43,20 +45,18 @@ else if (lsActiveList == 'active'){
     loadActive(listArray, lsActiveList);
     changeBlue('active');
 }
- 
-
- console.log(listArray);
 
 
+/*************************/
+//  **** Functions ****  //
+/*************************/
 
- 
 //load entire list
 function loadList(array, listType){
     array.forEach(function(item){
         addToDo(item.name, item.id, item.done);
     });
     activeList = listType;
-    console.log(activeList);
     updateLocalStorage();
 }
 
@@ -68,7 +68,6 @@ function loadCompleted(array, listType){
         }
     });
     activeList = listType;
-    console.log(activeList);
     updateLocalStorage();
 }
 
@@ -80,12 +79,10 @@ function loadActive(array, listType){
         }
     });
     activeList = listType;
-    console.log(activeList);
     updateLocalStorage();
 }
 
-//Add a to do
-
+//Add to list
 function addToDo(toDo, id, done){   
     const DONE = done? "check" : "circle";
     const LINE = done? "line-through" : "";
@@ -96,25 +93,19 @@ function addToDo(toDo, id, done){
                     <p class="text ${LINE}">${toDo}</p>
                     <button class="remove" job="delete" id="${id}"><img class="img" src="images/icon__close.png"/></button>
                     </li>
-
-
                 `;
     const position = "beforeend";
     document.getElementById("noList").innerHTML = '';
-    list.insertAdjacentHTML(position, item);
-
-    
+    list.insertAdjacentHTML(position, item);  
 }
 
 
-//complete function
-
+//Complete list item
 function completeToDo(element){
     element.classList.toggle("check");
     element.classList.toggle("circle");
     element.parentNode.querySelector(".checkMark").classList.toggle("hidden");
     element.parentNode.querySelector(".text").classList.toggle("line-through");
-    console.log(element.id);
     
     for(let i = 0; i < listArray.length; i++){
 
@@ -122,15 +113,12 @@ function completeToDo(element){
         {
         listArray[i].done = listArray[i].done ? false : true;
         }
-    }
-    
+    }   
     updateLocalStorage();
-    location.reload();
-    
+    location.reload();    
 }
 
-//remove to do function
-
+//Remove list item
 function removeToDo(element){
     var index = listArray.findIndex(function(o){
         return o.id == element.id;
@@ -141,53 +129,31 @@ function removeToDo(element){
     } 
     updateLocalStorage();
     location.reload();
-
 }
 
-
-//Clear list from local storage
+//Clear completed items from list
 function clearCompleted(){
-
    newListArray = listArray.filter(function(item) {
        return item.done !== true;
    });
-
-   listArray = newListArray;
-
-    // listArray.forEach(function(item){
-
-    //     if(item.done)
-    //     {
-    //         var index = listArray.findIndex(function(o){
-    //             return o.id === item.id;
-    //         })
-    //         if(index !== -1){
-    //             listArray.splice(index, 1);
-    //         };
-    //     }
-    //     return false;
-    // }
-    // )
+    listArray = newListArray;
     updateLocalStorage();
     location.reload();   
 }
     
-
+//Update local storage data
 function updateLocalStorage(){
     localStorage.setItem("TODO", JSON.stringify(listArray));
-    console.log(activeList);
     localStorage.setItem("ACTIVELIST", JSON.stringify(activeList));
-
     updateCount();
 }
 
-//Functions to have filtered lists
+//Functions to have filtered lists and update button color
 function completedToDoList(){
     changeBlue("completed");
     document.getElementById("list").innerHTML = "";
     loadCompleted(listArray, "completed");
 }
-
 
 function activeToDoList() {
     changeBlue("active");
@@ -202,6 +168,7 @@ function showAllList() {
 }
 
 
+//Set the button for the list currently being viewed as blue
 function changeBlue(elementID){
     var blElement = document.getElementById(elementID);
     blElement.classList.add("blue");
@@ -227,11 +194,7 @@ function changeBlue(elementID){
         var blElement = document.getElementById("active");
         blElement.classList.remove("blue");
     }
-
-
 }
-
-
 
 //Function to update item count
 function updateCount(){
@@ -243,13 +206,14 @@ function updateCount(){
     itemCount.innerHTML = count;
 }
 
+
+
 /*************************/
-//Event Listeners 
+// ***Event Listeners*** //
 /*************************/
 
 
 // add an item to the list
-
 input.addEventListener("keyup", (event) => {
     if(event.key == "Enter"){
         const toDo = event.target.value;
@@ -270,7 +234,6 @@ input.addEventListener("keyup", (event) => {
 });
 
 //target the items created dynamically
-
 list.addEventListener("click", function(event){
     const element = event.target;
     const elementJob = element.attributes.job.value;

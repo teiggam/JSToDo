@@ -31,7 +31,7 @@ Your users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./WebScreenShot.png)
 
 
 ### Links
@@ -51,30 +51,33 @@ Your users should be able to:
 I would like to preface this project with one statement:  I would not, in any scenario, call myself a front end developer at this time in my career.  The majority of my training in C#, .NET, and SQL.  The front end knowledge I have learned through Grand Circus is remedial HTML/CSS and JavaScript, and more in-depth Angular/Typescript. There were many times when I literally said outloud "If this was Angular, I would know how to do it."  But this challenge was not Angular.  This challenge was JavaScript.
 That being said, I am incredibly proud of the code I was able to accomplish.  I started by watching a Youtube video on how to make a todo list with JavaScript.  It enabled me to get basic functionality. 
 
+I am particularly excited that I figured out a way to filter the list and have the active list button change and stay blue, using the following functions.
 
 ```js
-//Functions to have filtered lists
+//Functions to have filtered lists and update button color
 function completedToDoList(){
+    changeBlue("completed");
     document.getElementById("list").innerHTML = "";
-    loadCompleted(listArray);
+    loadCompleted(listArray, "completed");
 }
 
-
 function activeToDoList() {
+    changeBlue("active");
     document.getElementById("list").innerHTML = "";
-    loadActive(listArray);
+    loadActive(listArray, "active");
 }
 
 function showAllList() {
+    changeBlue("all");
     document.getElementById("list").innerHTML = "";
-    loadList(listArray);
+    loadList(listArray, "all");
 }
 ```
 
 
 ### Continued development
 
-JavaScript is a language that I need to learn more about and I'm absolutely eager for the chance.  Starting this project, I had a small amount of vanilla JS experience.  Most of my previous front end coding was done via Angular and Typescript.  I've had a lot of fun learning new things.  I'm sure there are better and more efficient ways to code this project, and I'd love to learn those.
+JavaScript is a language that I need to learn more about and I'm absolutely eager for the chance.  Starting this project, I had a small amount of vanilla JS experience.  Most of my previous frontend coding was done via Angular and Typescript.  I've had a lot of fun learning new things.  I'm sure there are better and more efficient ways to code this project, and I'd love to learn those.  Additionally, I could think I could benefit from learning more about mobile functionality and having HTML/CSS more responsive to different screen sizes.
 
 ### Useful resources
 
@@ -91,5 +94,5 @@ Maggie Tamanini
 
 I would like to thank Youtube and Stack Overflow for helping me even get this far on this challenge.  
 
-###You are the real MVP.
+### You are the real MVP.
 
