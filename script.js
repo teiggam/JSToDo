@@ -5,52 +5,83 @@ const input = document.getElementById("input");
 const itemCount = document.getElementById("count");
 
 //set variables
-let listArray, id;
+let listArray = [], id = 0, activeList = 'all';
 
  //local storage; get and add
  let data = localStorage.getItem("TODO");
  let completedData = localStorage.getItem("TODO");
+ let lsActiveListJSON = localStorage.getItem("ACTIVELIST")
+
+
 
  //check for data, and send it to listArray
- if(data){
-     listArray = JSON.parse(data);
-     id = listArray.length;
-     loadList(listArray);
-     updateCount();
+ lsActiveList = JSON.parse(lsActiveListJSON);
+ listArray = JSON.parse(data);
+ if(listArray.length < 1){
+     id = 0;
+     listArray = []
+     document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
+
  }
  else{
-     listArray = []
-     id = 0;
-     document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
+     previousId = Math.max.apply(Math, listArray.map(function(o) {return o.id}));
+     id = previousId + 1;
  }
+
+console.log(lsActiveList);
+
+if(lsActiveList == 'all'){
+     loadList(listArray, lsActiveList);
+     updateCount();
+     changeBlue('all');
+    }
+else if (lsActiveList == 'completed'){
+    loadCompleted(listArray, lsActiveList);
+    changeBlue('completed');
+}
+else if (lsActiveList == 'active'){
+    loadActive(listArray, lsActiveList);
+    changeBlue('active');
+}
+ 
+
  console.log(listArray);
 
 
 
  
 //load entire list
-function loadList(array){
+function loadList(array, listType){
     array.forEach(function(item){
         addToDo(item.name, item.id, item.done);
     });
+    activeList = listType;
+    console.log(activeList);
+    updateLocalStorage();
 }
 
 //load list of only completed items
-function loadCompleted(array){
+function loadCompleted(array, listType){
     array.forEach(function(item){
         if(item.done){
             addToDo(item.name, item.id, item.done);
         }
     });
+    activeList = listType;
+    console.log(activeList);
+    updateLocalStorage();
 }
 
 //load list of only active/not completed items
-function loadActive(array){
+function loadActive(array, listType){
     array.forEach(function(item){
         if(!item.done){
             addToDo(item.name, item.id, item.done);
         }
     });
+    activeList = listType;
+    console.log(activeList);
+    updateLocalStorage();
 }
 
 //Add a to do
@@ -84,11 +115,17 @@ function completeToDo(element){
     element.parentNode.querySelector(".checkMark").classList.toggle("hidden");
     element.parentNode.querySelector(".text").classList.toggle("line-through");
     console.log(element.id);
-    console.log(listArray[element.id].done);
-    listArray[element.id].done = listArray[element.id].done ? false : true;
+    
+    for(let i = 0; i < listArray.length; i++){
+
+        if(listArray[i].id == element.id)
+        {
+        listArray[i].done = listArray[i].done ? false : true;
+        }
+    }
     
     updateLocalStorage();
-    console.log(listArray);
+    location.reload();
     
 }
 
@@ -111,20 +148,26 @@ function removeToDo(element){
 //Clear list from local storage
 function clearCompleted(){
 
-    listArray.forEach(function(item){
+   newListArray = listArray.filter(function(item) {
+       return item.done !== true;
+   });
 
-        if(item.done)
-        {
-            var index = listArray.findIndex(function(o){
-                return o.id === item.id;
-            })
-            if(index !== -1){
-                listArray.splice(index, 1);
-            };
-        }
-        return false;
-    }
-    )
+   listArray = newListArray;
+
+    // listArray.forEach(function(item){
+
+    //     if(item.done)
+    //     {
+    //         var index = listArray.findIndex(function(o){
+    //             return o.id === item.id;
+    //         })
+    //         if(index !== -1){
+    //             listArray.splice(index, 1);
+    //         };
+    //     }
+    //     return false;
+    // }
+    // )
     updateLocalStorage();
     location.reload();   
 }
@@ -132,24 +175,60 @@ function clearCompleted(){
 
 function updateLocalStorage(){
     localStorage.setItem("TODO", JSON.stringify(listArray));
+    console.log(activeList);
+    localStorage.setItem("ACTIVELIST", JSON.stringify(activeList));
+
     updateCount();
 }
 
 //Functions to have filtered lists
 function completedToDoList(){
+    changeBlue("completed");
     document.getElementById("list").innerHTML = "";
-    loadCompleted(listArray);
+    loadCompleted(listArray, "completed");
 }
 
 
 function activeToDoList() {
+    changeBlue("active");
     document.getElementById("list").innerHTML = "";
-    loadActive(listArray);
+    loadActive(listArray, "active");
 }
 
 function showAllList() {
+    changeBlue("all");
     document.getElementById("list").innerHTML = "";
-    loadList(listArray);
+    loadList(listArray, "all");
+}
+
+
+function changeBlue(elementID){
+    var blElement = document.getElementById(elementID);
+    blElement.classList.add("blue");
+    
+    if (elementID == "completed"){
+        var blElement = document.getElementById("active");
+        blElement.classList.remove("blue");
+
+        var blElement = document.getElementById("all");
+        blElement.classList.remove("blue");
+    }
+    else if (elementID == "active"){
+        var blElement = document.getElementById("completed");
+        blElement.classList.remove("blue");
+
+        var blElement = document.getElementById("all");
+        blElement.classList.remove("blue");
+    }
+    else if (elementID == "all"){
+        var blElement = document.getElementById("completed");
+        blElement.classList.remove("blue");
+
+        var blElement = document.getElementById("active");
+        blElement.classList.remove("blue");
+    }
+
+
 }
 
 
@@ -197,7 +276,6 @@ list.addEventListener("click", function(event){
     const elementJob = element.attributes.job.value;
     
     if(elementJob === "complete"){
-        console.log(element.id);
         completeToDo(element);
     }
     else if (elementJob === "delete" ){

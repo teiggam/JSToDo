@@ -92,7 +92,7 @@ body{
 .content{
     position: inherit;
     min-width: 60%;
-    min-height: 148;
+    min-height: 60px;
     left: 32rem;
     top: 29.6rem;
     background: #25273C;
@@ -191,8 +191,11 @@ li{
     top:5px;
     background-color: transparent;
 }
+.button{
+    font-weight: bold;
+}
 
-.filters .button{
+.filters .button, .count{
     background-color: transparent;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgba(255, 255, 255, 0.4);
@@ -209,4 +212,7 @@ li{
 
 .filters{
     text-align: center;
+}
+.blue{
+    color: rgba(114, 190, 248, 1) !important;
 }
