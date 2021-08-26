@@ -165,18 +165,11 @@ li{
     background-color: transparent;
     border: none;
 }
-
-.img:hover{
-
-    left: 20.83%;
-    right: 20.83%;
-    top: 20.83%;
-    bottom: 20.83%;  
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: rgba(128, 0, 128, 0.445);
-    
+.remove:hover{
+    color: white;
+    font-weight: bold;
 }
+
 
 .item{
     width:98.5%;
@@ -199,7 +192,7 @@ li{
     background-color: transparent;
 }
 
-.filterbutton{
+.filters .button{
     background-color: transparent;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgba(255, 255, 255, 0.4);
@@ -209,8 +202,7 @@ li{
     font-size: 12px;
     line-height: 15px;
 }
-.filterbutton :hover{
-    font-weight: bold;
+.filters .button:hover{
     color: white; 
 }
 
