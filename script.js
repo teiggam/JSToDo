@@ -18,7 +18,7 @@ let listArray, id;
  else{
      listArray = []
      id = 0;
-     document.getElementById("noList").innerHTML = 'You have no items in your todo list. Create an item to begin tracking your list.';
+     document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
  }
 
 
@@ -33,34 +33,24 @@ function loadList(array){
 
 //Add a to do
 
-function addToDo(toDo, id, done, trash){
-    const itemStart = `
-    <ul id="list"></ul>
-    <div class="clear">
-        <button class="clear" onclick="clearList()">Clear List</button>
-    </div>
-    `;
-    
+function addToDo(toDo, id, done, trash){   
     if(trash){
         return;
     }
-    if(!data){
-        document.getElementById("noList").innerHTML = itemStart;
-        location.reload();
-    }
-
 
     const DONE = done? "check" : "circle";
     const LINE = done? "line-through" : "";
     const item =`
                     <li class="item">
-                    <button class="${DONE}" job="complete" id="${id}"></button>
+                    <button class="${DONE}" job="complete" id="${id}"><img class="checkmark hidden" src="images/icon__check.png"/></button>
                     <p class="text" ${LINE}">${toDo}</p>
                     <button class="remove" job="delete" id="0"><img class="img" src="images/icon__close.png"/></button>
                     </li>
 
+
                 `;
     const position = "beforeend";
+    document.getElementById("noList").innerHTML = '';
     list.insertAdjacentHTML(position, item);
     
 }
@@ -71,6 +61,7 @@ function addToDo(toDo, id, done, trash){
 function completeToDo(element){
     element.classList.toggle("check");
     element.classList.toggle("circle");
+    element.parentNode.querySelector(".checkMark").classList.toggle("hidden");
     element.parentNode.querySelector(".text").classList.toggle("line-through");
     listArray[element.id].done = listArray[element.id].done ? false : true;
     
@@ -87,11 +78,13 @@ function removeToDo(element){
     localStorage.setItem("TODO", JSON.stringify(listArray))
 }
 
+//Clear list from local storage
 function clearList(){
     localStorage.clear();
     location.reload();
     return false;
 }
+
 
 /*************************/
 //Event Listeners 
@@ -135,5 +128,4 @@ list.addEventListener("click", function(event){
 });
 
 
-// startToDo();
 
