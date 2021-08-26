@@ -1,3 +1,4 @@
+
 //Select Elements
 
 const list = document.getElementById("list");
@@ -19,9 +20,9 @@ let listArray = [], id = 0, activeList = 'all';
  
  //check for data, and send it to listArray
  listArray = JSON.parse(data);
+ 
 
-
- if(listArray.length < 1){
+ if(listArray == null || listArray.length < 1){
      id = 0;
      listArray = []
      document.getElementById("noList").innerHTML = '<center>You have no items in your todo list. Create an item to begin tracking your list.</center>';
