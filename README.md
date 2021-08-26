@@ -14,11 +14,10 @@
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
-### The challenge
+### The Challenge
 
 Your users should be able to:
 
@@ -34,19 +33,21 @@ Your users should be able to:
 ![](./WebScreenShot.png)
 
 
-### Links
+### Accessing Code
 
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Github Pages](https://teiggam.github.io/JSToDo/index.html)
+- Click the green "Code" button to either download code or open to Visual Studio
 
 ## My process
 
-### Built with
+### Tech Used
 
 - JavaScript
 - HTML
 - CSS
+- IDE: VS Code
 
-### What I learned
+### What I Learned
 
 I would like to preface this project with one statement:  I would not, in any scenario, call myself a front end developer at this time in my career.  The majority of my training in C#, .NET, and SQL.  The front end knowledge I have learned through Grand Circus is remedial HTML/CSS and JavaScript, and more in-depth Angular/Typescript. There were many times when I literally said outloud "If this was Angular, I would know how to do it."  But this challenge was not Angular.  This challenge was JavaScript.
 That being said, I am incredibly proud of the code I was able to accomplish.  I started by watching a Youtube video on how to make a todo list with JavaScript.  It enabled me to get basic functionality. 
@@ -86,13 +87,13 @@ JavaScript is a language that I need to learn more about and I'm absolutely eage
 
 ## Author
 
-Maggie Tamanini
+[Maggie Tamanini](https://linkedin.com/in/deiggam)
 
 
 
 ## Acknowledgments
 
-I would like to thank Youtube and Stack Overflow for helping me even get this far on this challenge.  
+- I would like to thank Youtube and Stack Overflow for helping me even get this far on this challenge. 
+- I'd also like to thank [Kate Datema](https://github.com/KateDatema) for assistance with bouncing off ideas and bugs.
 
-### You are the real MVP.
 
