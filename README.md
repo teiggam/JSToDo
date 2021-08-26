@@ -22,12 +22,12 @@
 
 Your users should be able to:
 
-View the optimal layout for the application depending on their device's screen size.
-See hover states for all interactive elements on the page.
-Add new todo items to the list.
-Mark todo items as complete.
-Filter by all / active / complete todo items.
-Clear all completed todo items.
+- View the optimal layout for the application depending on their device's screen size.
+- See hover states for all interactive elements on the page.
+- Add new todo items to the list.
+- Mark todo items as complete.
+- Filter by all / active / complete todo items.
+- Clear all completed todo items.
 
 ### Screenshot
 
@@ -43,8 +43,8 @@ Clear all completed todo items.
 ### Built with
 
 - JavaScript
-- Semantic HTML5 markup
-- CSS custom properties
+- HTML
+- CSS
 
 ### What I learned
 
@@ -53,8 +53,22 @@ That being said, I am incredibly proud of the code I was able to accomplish.  I 
 
 
 ```js
-I am proud of the filtering functions that I wrote to allow the user to view all active items and all completed items.  This was a functionality that I could picture in my head, but getting it to function on the user side, was not as easy.
+//Functions to have filtered lists
+function completedToDoList(){
+    document.getElementById("list").innerHTML = "";
+    loadCompleted(listArray);
+}
 
+
+function activeToDoList() {
+    document.getElementById("list").innerHTML = "";
+    loadActive(listArray);
+}
+
+function showAllList() {
+    document.getElementById("list").innerHTML = "";
+    loadList(listArray);
+}
 ```
 
 
